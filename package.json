@@ -1,0 +1,106 @@
+{
+  "name": "analyzr",
+  "displayName": "Analyzr",
+  "description": "Analyzr — evaluate any Python file and get a detailed report on quality, style, complexity, and library-specific issues.",
+  "version": "0.1.0",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Linters"],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "analyzr.evaluate",
+        "title": "Analyzr: Evaluate This File",
+        "icon": "$(pick)"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "analyzr.evaluate",
+          "when": "resourceLangId == python",
+          "group": "navigation"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "analyzr.evaluate",
+          "when": "resourceLangId == python",
+          "group": "navigation@1"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "analyzr.evaluate",
+          "when": "resourceLangId == python",
+          "group": "navigation@1"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Analyzr",
+      "properties": {
+        "analyzr.maxLineLength": {
+          "type": "number",
+          "default": 88,
+          "description": "Maximum allowed line length (PEP8 default is 79, Black default is 88)."
+        },
+        "analyzr.checks.whitespace": {
+          "type": "boolean",
+          "default": true,
+          "description": "Check for trailing whitespace and blank line issues."
+        },
+        "analyzr.checks.lineTooLong": {
+          "type": "boolean",
+          "default": true,
+          "description": "Flag lines that exceed maxLineLength."
+        },
+        "analyzr.checks.docstrings": {
+          "type": "boolean",
+          "default": true,
+          "description": "Check for missing or malformed docstrings on functions and classes."
+        },
+        "analyzr.checks.complexity": {
+          "type": "boolean",
+          "default": true,
+          "description": "Compute cyclomatic complexity of functions."
+        },
+        "analyzr.checks.imports": {
+          "type": "boolean",
+          "default": true,
+          "description": "Check for unused imports, wildcard imports, and ordering."
+        },
+        "analyzr.checks.typeAnnotations": {
+          "type": "boolean",
+          "default": true,
+          "description": "Check for missing type annotations on function arguments and return types."
+        },
+        "analyzr.checks.libraryRules": {
+          "type": "boolean",
+          "default": true,
+          "description": "Apply library-specific best-practice rules (pandas, numpy, requests, etc.)."
+        },
+        "analyzr.checks.security": {
+          "type": "boolean",
+          "default": false,
+          "description": "Run bandit security checks (requires bandit to be installed)."
+        },
+        "analyzr.maxComplexity": {
+          "type": "number",
+          "default": 10,
+          "description": "Functions with cyclomatic complexity above this value are flagged."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.0.0"
+  }
+}
