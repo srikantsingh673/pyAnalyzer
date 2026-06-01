@@ -171,4 +171,4 @@ MIT
 
 ---
 
-Built by [Srikant](https://github.com/srikant-siddhiyoga)
+Built by [Srikant](https://srikantsingh673.github.io)
